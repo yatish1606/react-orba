@@ -1,46 +1,58 @@
-import { useSyncExternalStore, useCallback } from "react";
-import { Store } from "../types";
-import { unstable_batchedUpdates } from "react-dom";
+import { useSyncExternalStore, useCallback } from 'react';
+import { Store } from '../types';
+import { unstable_batchedUpdates } from 'react-dom';
 
 function useBeacon<T, U>(
   store: Store<T>,
-  selector: (state: T) => U
+  selector: (state: T) => U,
 ): [U, (updater: (previousState: U) => U) => void] {
   const getSnapshot = useCallback(
     () => selector(store.get()),
-    [store, selector]
+    [store, selector],
   );
   const state: U = useSyncExternalStore(
     store.subscribe,
     getSnapshot,
-    getSnapshot
+    getSnapshot,
   );
 
-  const stateSetter = (updater: (previousState: U) => U) => {
-    unstable_batchedUpdates(() => {
-      store.set((previousState) => {
-        const selectedState = selector(previousState);
-        const newState =
-          typeof updater === "function" ? updater(selectedState) : updater;
-
-        return {
-          ...previousState,
-          ...mapSelectedStateToGlobalState(selector, newState, previousState),
-        };
+  const setState = useCallback(
+    (updater: (prevState: U) => U) => {
+      unstable_batchedUpdates(() => {
+        store.set((prevState) => {
+          const selectedState = selector(prevState);
+          const newState =
+            typeof updater === 'function' ? updater(selectedState) : updater;
+          return {
+            ...prevState,
+            ...mapSelectedStateToGlobalState(selector, newState, prevState),
+          };
+        });
       });
-    });
-  };
+    },
+    [store, selector],
+  );
 
-  const updateState = useCallback(stateSetter, [store, selector]);
-
-  return [state, updateState];
+  return [state, setState];
 }
 
 function mapSelectedStateToGlobalState<T, U>(
   selector: (state: T) => U,
   newState: U,
-  prevState: T
+  prevState: T,
 ): Partial<T> {
+  const selected = selector(prevState);
+  if (typeof selected !== 'object' || selected === null) {
+    for (const key in prevState) {
+      if ((prevState as any)[key] === selected) {
+        return { [key]: newState } as Partial<T>;
+      }
+    }
+    throw new Error(
+      'Could not map primitive selected state back to global state.',
+    );
+  }
+
   const selectedKeys = Object.keys(selector(prevState) as Object);
   const updates: Partial<T> = {};
 

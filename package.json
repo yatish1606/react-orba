@@ -1,13 +1,13 @@
 {
-  "name": "react-beacon",
-  "version": "1.0.0",
+  "name": "react-hookline",
+  "version": "1.0.5",
   "description": "A global state manager for React applications, minus the ceremony",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rollup -c",
-    "prepare": "npm run build",
+    "prepare": "npx prettier . --write && npm run build",
     "dev": "tsc --watch"
   },
   "keywords": [
@@ -32,5 +32,8 @@
     "typescript": "^5.7.3"
   },
   "author": "Yatish Kelkar <yatish1606@gmail.com> (https://yatishkelkar.netlify.app)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "prettier": "^3.6.2"
+  }
 }

@@ -1,5 +1,5 @@
-import { unstable_batchedUpdates as batch } from "react-dom";
-import { Listener } from "../types";
+import { unstable_batchedUpdates as batch } from 'react-dom';
+import { Listener } from '../types';
 
 function createStore<T>(initialState: T) {
   let state: T = initialState;
@@ -11,7 +11,7 @@ function createStore<T>(initialState: T) {
 
   function set(next: T | ((prev: T) => T)) {
     const prev: T = state;
-    state = typeof next === "function" ? (next as any)(prev) : next;
+    state = typeof next === 'function' ? (next as any)(prev) : next;
 
     if (Object.is(prev, state)) return;
 
@@ -28,4 +28,4 @@ function createStore<T>(initialState: T) {
   return { get, set, subscribe };
 }
 
-export { createStore };
+export default createStore;

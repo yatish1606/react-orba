@@ -1,6 +1,7 @@
 ## react-beacon
 
-A simple, lightweight state management library for React applications. Works over the pub-sub model and batched updates.
+A simple, lightweight state management library for React applications. Works
+over the pub-sub model and batched updates.
 
 ### Running on local
 

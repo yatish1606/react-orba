@@ -6,7 +6,7 @@ type Store<T> = {
   set: (next: T | ((prev: T) => T), opts?: { silent?: boolean }) => void;
   subscribe: (
     listener: Listener<T>,
-    options?: { fireImmediately?: boolean }
+    options?: { fireImmediately?: boolean },
   ) => () => void;
 };
 
