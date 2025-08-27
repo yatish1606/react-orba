@@ -1,6 +1,6 @@
 {
-  "name": "react-hookline",
-  "version": "1.0.5",
+  "name": "react-orba",
+  "version": "1.0.6",
   "description": "A global state manager for React applications, minus the ceremony",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
