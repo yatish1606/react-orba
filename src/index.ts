@@ -1,1 +1,1 @@
-export * as useGlobalState from "./core/useGlobalState";
+export * as useGlobalState from "./core/useBeacon";
