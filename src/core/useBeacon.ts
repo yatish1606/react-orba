@@ -2,27 +2,19 @@ import { useSyncExternalStore, useCallback } from 'react';
 import { Store } from '../types';
 import { unstable_batchedUpdates } from 'react-dom';
 
-function useBeacon<T, U>(
+function useValue<T, U>(
   store: Store<T>,
   selector: (state: T) => U,
 ): [U, (updater: (previousState: U) => U) => void] {
-  const getSnapshot = useCallback(
-    () => selector(store.get()),
-    [store, selector],
-  );
-  const state: U = useSyncExternalStore(
-    store.subscribe,
-    getSnapshot,
-    getSnapshot,
-  );
+  const getSnapshot = useCallback(() => selector(store.get()), [store, selector]);
+  const state: U = useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
 
   const setState = useCallback(
     (updater: (prevState: U) => U) => {
       unstable_batchedUpdates(() => {
         store.set((prevState) => {
           const selectedState = selector(prevState);
-          const newState =
-            typeof updater === 'function' ? updater(selectedState) : updater;
+          const newState = typeof updater === 'function' ? updater(selectedState) : updater;
           return {
             ...prevState,
             ...mapSelectedStateToGlobalState(selector, newState, prevState),
@@ -48,9 +40,7 @@ function mapSelectedStateToGlobalState<T, U>(
         return { [key]: newState } as Partial<T>;
       }
     }
-    throw new Error(
-      'Could not map primitive selected state back to global state.',
-    );
+    throw new Error('Could not map primitive selected state back to global state.');
   }
 
   const selectedKeys = Object.keys(selector(prevState) as Object);
@@ -58,13 +48,11 @@ function mapSelectedStateToGlobalState<T, U>(
 
   selectedKeys.forEach((key) => {
     if (key in (newState as Object)) {
-      updates[key as keyof T] = newState[
-        key as keyof U
-      ] as unknown as T[keyof T];
+      updates[key as keyof T] = newState[key as keyof U] as unknown as T[keyof T];
     }
   });
 
   return updates;
 }
 
-export default useBeacon;
+export default useValue;

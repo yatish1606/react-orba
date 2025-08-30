@@ -1,9 +1,9 @@
-## react-orba
+# react-orba
 
-A simple, lightweight state management library for React applications. Works
-over the pub-sub model and batches state updates.
+A simple, lightweight state management library for React applications. Works over the pub-sub model
+and batches state updates.
 
-### Usage
+## Usage
 
 1. At the root of your app or a module, create a store.
 
@@ -29,8 +29,7 @@ const initialParams: AppState = {
 const appStore = createStore<AppState>(initialParams);
 ```
 
-2. In your component, slice out your state variable(s) using the `useBeacon`
-   hook.
+2. In your component, slice out your state variable(s) using the `useBeacon` hook.
 
 ```tsx
 import { appStore } from '../App';
@@ -44,7 +43,7 @@ const [theme, setTheme] = useBeacon(appStore, (state) => state.theme);
 <button onClick={() => setTheme('light')}>Toggle theme</button>
 ```
 
-### Running on local
+## Running on local
 
 1. Clone the repo
 

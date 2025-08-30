@@ -1,5 +1,5 @@
 import { unstable_batchedUpdates as batch } from 'react-dom';
-import { Listener } from '../types';
+import { Listener, StoreSetOptions, StoreSubscriptionOptions } from '../types';
 
 function createStore<T>(initialState: T) {
   let state: T = initialState;
@@ -9,19 +9,22 @@ function createStore<T>(initialState: T) {
     return state;
   }
 
-  function set(next: T | ((prev: T) => T)) {
+  function set(next: T | ((prev: T) => T), options?: StoreSetOptions) {
     const prev: T = state;
     state = typeof next === 'function' ? (next as any)(prev) : next;
 
-    if (Object.is(prev, state)) return;
+    if (Object.is(prev, state) || options?.silent) return;
 
     batch(() => {
       listeners.forEach((listener) => listener(state, prev));
     });
   }
 
-  function subscribe(listener: Listener<T>) {
+  function subscribe(listener: Listener<T>, options?: StoreSubscriptionOptions) {
     listeners.add(listener);
+    if (options?.fireImmediately) {
+      listener(state, state);
+    }
     return () => listeners.delete(listener);
   }
 
