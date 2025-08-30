@@ -3,6 +3,22 @@
 A simple, lightweight state management library for React applications. Works over the pub-sub model
 and batches state updates.
 
+## When to use react-orba?
+
+`react-orba` isn’t designed as a drop-in replacement for popular libraries like
+[Redux](https://redux.js.org/) or [Zustand](https://github.com/pmndrs/zustand). Instead, it’s best
+suited for scenarios with frequent state changes where a lightweight, minimal state management
+solution is preferred.
+
+| Feature                     | react-orba                   | redux                           | zustand          |
+| --------------------------- | ---------------------------- | ------------------------------- | ---------------- |
+| **Bundle Size**             | ✅ Tiny & minimal _(~2.5kb)_ | Boilerplate + toolkit _(~40kb)_ | Small _(~3.5kb)_ |
+| **Boilerplate**             | ✅ Low                       | Significant                     | Minimal          |
+| **Built-in batching**       | ✅ Yes                       | No                              | No               |
+| **Middlewares and plugins** | ⚠️ In roadmap                | ✅ Yes                          | ✅ Yes           |
+| **Devtools support**        | ⚠️ In roadmap                | ✅ Yes                          | Limited          |
+| **Debugging support**       | No                           | ✅ Excellent                    | Limited          |
+
 ## Usage
 
 1. At the root of your app or a module, create a store.
@@ -10,31 +26,18 @@ and batches state updates.
 ```tsx
 import { createStore } from 'react-orba';
 
-interface AppState {
-  theme: string;
-  userContext: {
-    userId: string | undefined;
-    authTimeout: number;
-  };
-}
-
 const initialParams: AppState = {
   theme: 'light',
-  userContext: {
-    userId: undefined,
-    authTimeout: 3600,
-  },
+  ...
 };
 
 const appStore = createStore<AppState>(initialParams);
 ```
 
-2. In your component, slice out your state variable(s) using the `useBeacon` hook.
+2. In your component, slice out your state variable(s) using the `useValue` hook.
 
 ```tsx
-import { appStore } from '../App';
-
-const [theme, setTheme] = useBeacon(appStore, (state) => state.theme);
+const [theme, setTheme] = useValue<AppState, string>(appStore, (state) => state.theme);
 ```
 
 3. Update state as needed - similar how you would use the `useState` hook!
@@ -43,25 +46,8 @@ const [theme, setTheme] = useBeacon(appStore, (state) => state.theme);
 <button onClick={() => setTheme('light')}>Toggle theme</button>
 ```
 
-## Running on local
+## Docs
 
-1. Clone the repo
-
-```
-git clone https://github.com/yatish1606/react-orba.git && cd react-orba
-```
-
-2. Install dependencies
-
-```
-npm install
-```
-
-> [!WARNING]  
-> Use the command `npm i --resolve` for incompatible React versions.
-
-2. Add your changes / modifications or debug points and run on local
-
-```
-npm run dev
-```
+- [Changelog](https://github.com/yatish1606/react-orba/blob/main/CHANGELOG.md)
+- [Run project locally](https://github.com/yatish1606/react-orba/blob/main/LOCAL_SETUP.md)
+- [Usage examples](https://github.com/yatish1606/react-orba/blob/main/EXAMPLES.md)

@@ -1,6 +1,6 @@
 {
   "name": "react-orba",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A global state manager for React applications, minus the ceremony",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -8,7 +8,8 @@
   "scripts": {
     "build": "rollup -c",
     "prepare": "npx prettier . --write && npm run build",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "pack": "npm pack react-orba@$(node -p \"require('./package.json').version\")"
   },
   "keywords": [
     "react",
@@ -25,6 +26,8 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "prettier": "^3.6.2",
     "rollup": "^4.34.8",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-postcss": "^4.0.2",
@@ -33,7 +36,7 @@
   },
   "author": "Yatish Kelkar <yatish1606@gmail.com> (https://yatishkelkar.netlify.app)",
   "license": "MIT",
-  "dependencies": {
-    "prettier": "^3.6.2"
-  }
+  "files": [
+    "dist"
+  ]
 }

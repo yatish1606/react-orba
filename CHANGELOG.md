@@ -3,6 +3,19 @@
 All notable changes to this project are documented here. The format is based on
 [keep a changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.8] - 2025-08-30
+
+#### Added
+
+- Included `LOCAL_SETUP.md` and `EXAMPLES.md` to link out additional documentation.
+- Added `@rollup/plugin-terser` as a dev dependency for minification.
+- Added command to generate tar file with latest build
+
+#### Changed
+
+- Renamed `useBeacon.ts` to `useValue.ts`
+- Removed generation of sourcemaps
+
 ## [1.0.7] - 2025-08-30
 
 #### Added
@@ -14,7 +27,7 @@ All notable changes to this project are documented here. The format is based on
 
 #### Changes
 
-- Renamed `useBeacon` to `useValue`
+- Renamed hook `useBeacon` to `useValue`
 
 ## [1.0.6] - 2025-08-27
 
