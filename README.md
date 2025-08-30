@@ -46,7 +46,28 @@ const [theme, setTheme] = useValue<AppState, string>(appStore, (state) => state.
 <button onClick={() => setTheme('light')}>Toggle theme</button>
 ```
 
-## Docs
+## Roadmap
+
+#### Developer Experience and tooling
+
+- [ ] Support for developer tools
+- [ ] Logging and debug modes
+
+#### State management
+
+- [x] Support for silent state updates and immediate update firing
+- [ ] Support for async state updates
+- [ ] Support for persistence layer - integration with IndexedDB or browser storages
+- [ ] Custom equality function for state slices
+- [ ] Memoized `useValue` hook
+
+#### Documentation and hygiene
+
+- [ ] Example usages for complex patters
+- [ ] Migrating from Zustand
+- [ ] Fix persistent linting issues
+
+## Resources
 
 - [Changelog](https://github.com/yatish1606/react-orba/blob/main/CHANGELOG.md)
 - [Run project locally](https://github.com/yatish1606/react-orba/blob/main/LOCAL_SETUP.md)
