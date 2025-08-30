@@ -55,7 +55,7 @@ const [theme, setTheme] = useValue<AppState, string>(appStore, (state) => state.
 
 #### State management
 
-- [x] Support for silent state updates and immediate update firing
+- [x] ~~Support for silent state updates and immediate update firing~~
 - [ ] Support for async state updates
 - [ ] Support for persistence layer - integration with IndexedDB or browser storages
 - [ ] Custom equality function for state slices
