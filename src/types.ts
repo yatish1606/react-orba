@@ -5,14 +5,16 @@ type StoreSetOptions = {
   silent?: boolean;
 };
 
-type StoreSubscriptionOptions = {
+type StoreSubscriberOptions = {
   fireImmediately?: boolean;
 };
 
 type Store<T> = {
-  get: () => T;
-  set: (next: T | ((prev: T) => T), options?: StoreSetOptions) => void;
-  subscribe: (listener: Listener<T>, options?: StoreSubscriptionOptions) => () => void;
+  get: () => Readonly<T>;
+  set: (next: Updater<T>, options?: StoreSetOptions) => void;
+  subscribe: (listener: Listener<T>, options?: StoreSubscriberOptions) => () => void;
 };
 
-export { EqualityFn, Listener, Store, StoreSetOptions, StoreSubscriptionOptions };
+type Updater<T> = T | ((prev: T) => T);
+
+export { EqualityFn, Listener, Store, StoreSetOptions, StoreSubscriberOptions, Updater };
