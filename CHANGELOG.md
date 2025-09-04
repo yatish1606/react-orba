@@ -3,6 +3,12 @@
 All notable changes to this project are documented here. The format is based on
 [keep a changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.9] - 2025-09-04
+
+#### Changed
+
+- Refactored some types for better DX
+
 ## [1.0.8] - 2025-08-30
 
 #### Added
