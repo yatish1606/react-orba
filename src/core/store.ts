@@ -1,7 +1,9 @@
 import { unstable_batchedUpdates as batch } from 'react-dom';
-import { Listener, StoreSetOptions, StoreSubscriberOptions, Updater } from '../types';
+import { Listener, StoreOptions, StoreSetOptions, StoreSubscriberOptions, Updater } from '../types';
 
-function createStore<T>(initialState: T) {
+const PERSISTENCE_KEY_BASE: string = 'orba-ps-';
+
+function createStore<T>(initialState: T, storeOptions?: StoreOptions) {
   let state: T = initialState;
   const listeners = new Set<Listener<T>>();
 

@@ -1,6 +1,25 @@
 type Listener<T> = (state: T, prev: T) => void;
 type EqualityFn<T> = (first: T, second: T) => boolean;
 
+type PersistenceAdapter = {
+  get: <T>(key: string) => T | null;
+  set: <T>(key: string, value: T) => void;
+  remove: (key: string) => void;
+  clear: () => void;
+};
+
+type PeristenceType = 'none' | 'session';
+
+type PersistenceOptions = {
+  type: PeristenceType;
+  key: string;
+  timeToLive?: number;
+};
+
+type StoreOptions = {
+  persistence?: PersistenceOptions;
+};
+
 type StoreSetOptions = {
   silent?: boolean;
 };
@@ -17,4 +36,15 @@ type Store<T> = {
 
 type Updater<T> = T | ((prev: T) => T);
 
-export { EqualityFn, Listener, Store, StoreSetOptions, StoreSubscriberOptions, Updater };
+export {
+  PersistenceAdapter,
+  PeristenceType,
+  PersistenceOptions,
+  StoreOptions,
+  EqualityFn,
+  Listener,
+  Store,
+  StoreSetOptions,
+  StoreSubscriberOptions,
+  Updater,
+};

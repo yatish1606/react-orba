@@ -3,6 +3,16 @@
 All notable changes to this project are documented here. The format is based on
 [keep a changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.10] - 2025-00-06
+
+#### Added
+
+- Added baseline types and classes for persistence support using `sessionStorage`
+
+#### Changed
+
+- Defined a generic adapter `PersistenceAdapter` to support session, local storages and in future, async DBs.
+
 ## [1.0.9] - 2025-09-04
 
 #### Changed

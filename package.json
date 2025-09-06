@@ -1,6 +1,6 @@
 {
   "name": "react-orba",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A global state manager for React applications, minus the ceremony",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
