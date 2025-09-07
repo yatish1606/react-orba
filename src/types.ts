@@ -8,7 +8,7 @@ type PersistenceAdapter = {
   clear: () => void;
 };
 
-type PeristenceType = 'none' | 'session';
+type PeristenceType = 'none' | 'session' | 'local-storage';
 
 type PersistenceOptions = {
   type: PeristenceType;
